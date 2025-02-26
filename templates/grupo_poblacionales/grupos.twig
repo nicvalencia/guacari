@@ -1,0 +1,68 @@
+{% extends 'master.twig' %}
+{% block title %}
+	Listado de grupos poblacionales
+{% endblock %}
+
+
+{% block body %}
+
+	<h4 class="text-center lblmodule">En este módulo podrás consultar todo lo referente a los grupos poblacionales</h4>
+
+	<div class="container-fluid">
+
+		<table class="table dataTable" id="table_grupos">
+			<thead>
+				<tr>
+					<th>Nombre</th>					
+					<th>Estado</th>					
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="modal_edit_grupos" aria-labelledby="modal_edit_grupos" aria-hidden="true">
+		<div class="modal-dialog ">
+			<form method="post" action="{{url_for('SaveGrupos')}}">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modal_edit_grupos">Grupos poblacionales</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<div class="row">
+
+							<div class="mb-3">
+								<label for="rol" class="form-label required">Nombre del grupo poblacional</label>
+								<input class="form-control" name="name_grupo" placeholder="Nombre" required >
+							</div>
+
+							<div class="mb-3">
+								<label for="estado" class="form-label required">Estado </label>
+								<select name="estado" class="form-select" required>
+									<option value="">Seleccione estado</option>
+									{% for list_estados in estados %}
+										<option value="{{list_estados.id}}">{{list_estados.description}}</option>
+									{% endfor %}
+
+								</select>
+							</div>
+
+
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
+						<input type="hidden" name="idgrupo">
+						{{ csrf_field() | raw }}
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>{% endblock %}{% block js %}{% endblock %}

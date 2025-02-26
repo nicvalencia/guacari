@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="{{ base_path() }}/assets/" data-template="vertical-menu-template-free">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+
+		<title>Guacari</title>
+
+		<meta name="description" content=""/>
+		<link rel="icon" type="image/x-icon" href="{{ base_path() }}/assets/img/favicon/favicon.ico"/>
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="{{ base_path() }}/assets/css/login.css"/>
+	</head>
+
+	<body>
+		<div class="background-pattern"></div>
+
+		<div class="container">
+			<div class="login-form">
+				<img src="{{ base_path() }}/assets/img/logo.png" alt="Logo Zarzal Valle" class="logo">
+
+				{% set passerror = error('error')[0] %}
+
+				<h5 class="form-title">Ingresa tus datos para iniciar sesión</h5>
+
+				<form method="post" action="{{url_for('Ingreso')}}">
+					<div class="mb-3">
+						<label class="form-label">Correo electrónico</label>
+						<input type="email" name="email" class="form-control" placeholder="Ingresa tu correo electrónico">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Contraseña</label>
+						<div class="password-group">
+							<input type="password" name="passwd" class="form-control" placeholder="Ingresa tu contraseña">
+							<button type="button" class="password-toggle">
+								<i class="bi bi-eye"></i>
+							</button>
+						</div>
+					</div>
+					
+					{{ csrf_field() | raw }}
+					<div class="forgot-password">
+						<a href="{{base_path()}}/login/new_pass">¿Olvidaste la contraseña?</a>
+					</div>
+
+					<button type="submit" class="btn-login">Iniciar sesión</button>
+
+					<div class="policy-text">
+						Visita nuestra
+						<a href="#">Política de tratamiento y protección de datos</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+
+
+</html>

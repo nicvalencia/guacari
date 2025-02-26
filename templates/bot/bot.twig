@@ -1,0 +1,197 @@
+{% extends 'master.twig' %}
+{% block title %}
+	Configuración Bot
+{% endblock %}
+
+{% block body %}
+
+
+	<h4 class="text-center lblmodule">En este módulo podrás consultar todo lo referente a la configuración del bot</h4>
+
+	<div class="container-fluid">
+		<form method="post" id="menu_bot_conf" class="form-horizontal">
+			<div class="dd" id="items_menu">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">
+							Menu del Bot
+
+
+						</h4>
+						{{ menu | raw }}
+					</div>
+				</div>
+				<input type="hidden" name="data" id="nestable-output">
+				{{ csrf_field() | raw }}
+			</div>
+		</form>
+	</div>
+
+	<div class="footer-actions ">
+		<div class="btn-toolbar gap-2">
+			<button class="btn btn-action">
+				<i class="fas fa-plus me-1"></i>
+				Label predefinido
+			</button>
+			<button type="button" class="btn btn-action tipos_resp" data-formulario="frmtexto">
+				<i class="fas fa-plus me-1"></i>
+				Texto
+			</button>
+			<button class="btn btn-action tipos_resp" data-formulario="frmaudio">
+				<i class="fas fa-plus me-1"></i>
+				Audio
+			</button>
+			<button class="btn btn-action tipos_resp" data-formulario="frmvideo">
+				<i class="fas fa-plus me-1"></i>
+				Video
+			</button>
+			<button class="btn btn-action tipos_resp" data-formulario="frmimagen">
+				<i class="fas fa-plus me-1"></i>
+				Imagen
+			</button>
+			<button class="btn btn-action tipos_resp" data-formulario="frmarchivo">
+				<i class="fas fa-plus me-1"></i>
+				Archivo
+			</button>
+			<!--<button class="btn btn-action tipos_resp" data-formulario="frmlink">
+																									<i class="fas fa-plus me-1"></i>
+																									Link
+																								</button>-->
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="optmodal" aria-labelledby="optmodal" aria-hidden="true">
+		<div class="modal-dialog ">
+			<form method="post" action="{{url_for('AddMenu')}}" enctype="multipart/form-data">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="optmodal"></h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-group frmtexto" data-formulario="frmtexto">
+							<label for="title" class=" control-label">Texto</label>
+							<div class="col-lg-10">
+								<input type="text" name="title" value="" class="form-control" autocomplete="off"/>
+							</div>
+						</div>
+
+						<div class="form-group frmaudio" data-formulario="frmaudio">
+							<label for="title" class=" control-label">Adjuntar Audio</label>
+							<div class="col-lg-10">
+								<input type="file" name="audio" value="" class="form-control" accept="video/mp4,video/x-m4v,video/*"/>
+							</div>
+						</div>
+
+						<div class="form-group frmimagen" data-formulario="frmimagen">
+							<label for="title" class=" control-label">Adjuntar Imagen</label>
+							<div class="col-lg-10">
+								<input type="file" name="imagen" value="" class="form-control" autocomplete="off" accept="image/png,image/jpeg,image/jpg"/>
+							</div>
+						</div>
+
+						<div class="form-group frmarchivo" data-formulario="frmarchivo">
+							<label for="title" class=" control-label">Adjuntar Archivo</label>
+							<div class="col-lg-10">
+								<input type="file" name="archivo" value="" class="form-control" autocomplete="off" accept="application/pdf"/>
+							</div>
+						</div>
+
+						<div class="form-group frmvideo" data-formulario="frmvideo">
+							<label for="title" class=" control-label">Adjuntar Video</label>
+							<div class="col-lg-10">
+								<input type="file" name="video" value="" class="form-control" autocomplete="off" accept="avi"/>
+							</div>
+						</div>
+
+						<!--<div class="form-group frmlink" data-formulario="frmlink">
+																																																	<label for="title" class=" control-label">Texto del link</label>
+																																																	<div class="col-lg-10">
+																																																		<input type="text" name="texto_inf" value="" class="form-control" autocomplete="off"/>
+																																																	</div>
+																																																</div>-->
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
+						<input type="hidden" name="action" value="add">
+						<input type="hidden" name="attach" value="">
+						<input type="hidden" name="idnewparent" value="">
+						<input type="hidden" name="idgroup" value="{{ idgroup }}">
+						{{ csrf_field() | raw }}
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!-- Edite Menu dialog -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="optmodal">Editar Menu</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<form action="{{ url_for('BOT') }}/editar_menu" method="post" class="form-horizontal" role="form">
+
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="title" class="col-lg-2 control-label">Titulo</label>
+							<div class="col-lg-10">
+								<input
+								type="text" name="title" id="title_bot" class="form-control test_edit" autocomplete="off"/>
+							<!--<button type="button" id="open_emoji" onclick="m('#open_emoji','#title_bot')" class="btn btn-info">Agregar emoji</button>-->
+							</div>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<span class="prompt-msg text-danger" style="display:none;"></span>
+						<input type="hidden" name="idmenus" value="">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="save_edit btn btn-primary">Guardar</button>
+						{{ csrf_field() | raw }}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete Menu dialog -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="optmodal">Eliminar</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<form action="{{ url_for('BOT') }}/menu_del" method="post">
+
+					<div class="modal-body">
+						<p>Estas seguro de querer borrar este item?</p>
+					</div>
+					<div class="modal-footer">
+						<span class="prompt-msg text-danger" style="display:none;"></span>
+						<input type="hidden" name="id" value=""/>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Borrar</button>
+						{{ csrf_field() | raw }}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block js %}{% endblock %}

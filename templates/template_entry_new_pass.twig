@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="{{ base_path() }}/assets/" data-template="vertical-menu-template-free">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+
+		<title>Flexu
+		</title>
+
+		<meta name="description" content=""/>
+
+		<!-- Favicon
+																												<link
+																												rel="icon" type="image/x-icon" href="{{ base_path() }}/assets/img/favicon/favicon.ico"/> -->
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com"/> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link
+		href="https://fonts.googleapis.com/css2?family=family=Inter:wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
+
+		<!-- Icons. Uncomment required icon fonts -->
+		<link rel="stylesheet" href="{{ base_path() }}/assets/vendor/fonts/boxicons.css"/>
+		<link
+		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.2/src/css/icons.min.css">
+
+		<!-- Core CSS -->
+		<link rel="stylesheet" href="{{ base_path() }}/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+		<link rel="stylesheet" href="{{ base_path() }}/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+		<link
+		rel="stylesheet" href="{{ base_path() }}/assets/css/demo.css"/>
+
+
+		<!-- Vendors CSS -->
+		<link rel="stylesheet" href="{{ base_path() }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+
+		<!-- Page CSS -->
+		<!-- Page -->
+		<link
+		rel="stylesheet" href="/assets/vendor/css/pages/page-auth.css"/> <!-- Helpers -->
+		<script src="{{ base_path() }}/assets/vendor/js/helpers.js"></script>
+
+		<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+		<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+		<script src="{{ base_path() }}/assets/js/config.js"></script>
+		{% block custom_css %}{% endblock %}
+		<script type='text/javascript'>
+			var BaseUrl = {
+"ajaxurl": "{{ base_path() }}"
+}
+
+var sessionTimeout = "2";
+
+function DisplaySessionTimeout() {
+sessionTimeout = sessionTimeout - 1;
+
+if (sessionTimeout >= 0) {
+window.setTimeout("DisplaySessionTimeout()", 1800000);
+console.log(sessionTimeout)
+} else {
+location.href = BaseUrl.ajaxurl + "/login/logout"
+}
+}
+
+DisplaySessionTimeout()
+		</script>
+	</head>
+
+	<body>
+		<!-- Content -->
+		<div class="row">
+			<div class="col-7 backleft"></div>
+
+			<div
+				class="col-5 ">
+				<!-- Register -->
+				<div class="card righcolumlogin">
+					<div class="card-body">
+						{% if error('error')[0]  %}
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong>
+									<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M22 11.0801V12.0001C21.9988 14.1565 21.3005 16.2548 20.0093 17.9819C18.7182 19.7091 16.9033 20.9726 14.8354 21.584C12.7674 22.1954 10.5573 22.122 8.53447 21.3747C6.51168 20.6274 4.78465 19.2462 3.61096 17.4372C2.43727 15.6281 1.87979 13.4882 2.02168 11.3364C2.16356 9.18467 2.99721 7.13643 4.39828 5.49718C5.79935 3.85793 7.69279 2.71549 9.79619 2.24025C11.8996 1.76502 14.1003 1.98245 16.07 2.86011" stroke="#255F0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										<path d="M22 4L12 14.01L9 11.01" stroke="#255F0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+									Proceso realizado</strong>
+								El email enviado con éxito, por favor verifique su bandeja de entrada.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						{% endif %}
+
+						<!-- Logo -->
+						<div class="">
+							<a href="index.html" class="app-brand-link gap-2 mb-4">
+								<span class="app-brand-logo demo">
+									<img src="{{ base_path() }}/assets/img/logoflexu.png" class="img-thumbnail" style="margin: 0 auto;">
+								</span>
+								<span class="app-brand-text demo text-body fw-bolder"></span>
+							</a>
+						</div>
+
+						<h2 class="mb-3">Recuperar contraseña</h2>
+
+
+						<h4>Crear una nueva contraseña</h4>
+						<p class="mb-2">
+							Tener en cuenta:
+							<ul>
+								<li>
+									Mínimo 8 carácteres.</li>
+								<li>1 Letra mayúscula.</li>
+								<li>1 Letra minúscula.</li>
+								<li>1 Número.</li>
+								<li>
+									1 Carácter especial. (+,-,*,@,_,?)</li>
+							</p>
+
+							<form id="formAuthentication" class="mb-3" action="/login/change_pass" method="POST">
+								<div class="mb-3 form-password-toggle">
+
+									<div class="d-flex justify-content-between">
+										<label class="form-label" for="password">Ingresar nueva contraseña</label>
+									</div>
+
+									<div class="input-group input-group-merge">
+										<input type="password" id="password" class="form-control" name="passwd" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password"/>
+										<span class="input-group-text cursor-pointer">
+											<i class="ph ph-eye-closed bx bx-hide"></i>
+										</span>
+									</div>
+								</div>
+
+								<div class="mb-3 form-password-toggle">
+									<div class="d-flex justify-content-between">
+										<label class="form-label" for="password">Confirmar contraseña</label>
+									</div>
+
+									<div class="input-group input-group-merge">
+										<input type="password" id="password_re" class="form-control" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password"/>
+										<span class="input-group-text cursor-pointer">
+											<i class="ph ph-eye-closed bx bx-hide"></i>
+										</span>
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<button class="btn btn-primary d-grid" type="submit">Crear contraseña</button>
+								</div>
+
+								{{ csrf_field() | raw }}
+								<input type="hidden" name="iduser" value="{{args.iduser}}">
+								<input type="hidden" name="code" value="{{args.code}}">
+							</div>
+							<!-- /Register -->
+						</p>
+					</div>
+				</div>
+
+				<script src="{{ base_path() }}/assets/vendor/libs/jquery/jquery.js"></script>
+				<script src="{{ base_path() }}/assets/vendor/libs/popper/popper.js"></script>
+				<script src="{{ base_path() }}/assets/vendor/js/bootstrap.js"></script>
+
+				<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+				<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+				<script src="{{ base_path() }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+				<script src="{{ base_path() }}/assets/vendor/js/menu.js"></script>
+
+				<!-- endbuild -->
+				<!-- Vendors JS -->
+				<!-- Main JS --><script src="{{ base_path() }}/assets/js/main.js"> </script>
+				<!-- Page JS -->
+				<!-- Place this tag in your head or just before your close body tag. -->
+				<script async defer src="https://buttons.github.io/buttons.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+				<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+				<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+				<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+				<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap5.min.js"></script>
+				<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+				<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+				<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+				<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
+				<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+				<script src="{{ base_path() }}/assets/js/dropzone.js"></script>
+
+				<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+				<script src="{{ base_path() }}/js/custom.js"></script>
+				<script src="{{ base_path() }}/assets/js/ui-popover.js"></script>
+				<!-- Place this tag in your head or just before your close body tag. -->
+				<script async defer src="https://buttons.github.io/buttons.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.2/src/index.min.js"></script>
+			</body>
+		</html>
+	</body>
+</html>

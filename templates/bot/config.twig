@@ -1,0 +1,70 @@
+{% extends 'master.twig' %}
+{% block title %}
+	Configuración Bot
+{% endblock %}
+
+{% block body %}
+
+
+	<h4 class="text-center lblmodule">En este módulo podrás consultar todo lo referente a la configuración del bot</h4>
+
+	<div class="container-fluid">
+
+		<table class="table dataTable" id="table_configuration">
+			<thead>
+				<tr>
+					<th>Tipo mensaje</th>
+					<th>Mensaje</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for list_config in config %}
+					<tr>
+						<td>{{list_config.description}}</td>
+						<td>{{list_config.text_info}}</td>
+						<td>
+							<i class="fas fa-edit fa-2x edit_bot" data-idconfig="{{list_config.id}}" data-textinfo="{{list_config.text_info}}"></i>
+						</td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="modal_edit_bot" aria-labelledby="modal_edit_bot" aria-hidden="true">
+		<div class="modal-dialog">
+			<form method="post" action="{{url_for('Save_msg')}}">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modal_edit_bot">Usuarios</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<div class="row">
+
+							<div class="mb-3">
+								<label for="rol" class="form-label required">Mensaje de bienvenida</label>
+								<textarea class="form-control" name="text_info" id="" rows="8"></textarea>
+
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
+						<input type="hidden" name="idconfig">
+						{{ csrf_field() | raw }}
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+{% block js %}{% endblock %}
